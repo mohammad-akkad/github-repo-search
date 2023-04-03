@@ -13,6 +13,7 @@ query search($query: String!, $after: String) {
         ... on Repository {
           id
           name
+          url
           owner {
             login
           }

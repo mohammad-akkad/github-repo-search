@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-
+  /**
+   * Returns the token modal.
+   *
+   * @remarks
+   * This method is a modal to set the token.
+   *
+   * @param props - contains a call back function to handle tokenset
+   * @returns Returns the token modal
+   *
+   */
 const TokenModal = (props: any) => {
   Modal.setAppElement("#root")
   const [token, setToken] = useState("");
   const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
-
+  /**
+   * make the token modal visiable.
+   */
   const handleTokenInput = () => {
     setIsTokenModalOpen(true);
   };
-
+  /**
+   * make the token modal disapper and handle the call back function to set the token.
+   */
   const handleTokenSubmit = () => {
     props.setTokenHandler(token)
     setIsTokenModalOpen(false);

@@ -4,15 +4,31 @@ import Column from "antd/es/table/Column";
 import { useState } from "react";
 import { SEARCH_REPOSITORIES } from "../graphql";
 import { SearchOutlined } from "@ant-design/icons";
-
+  /**
+   * Returns a list of repositories.
+   *
+   * @remarks
+   * This method is a functional component.
+   *
+   * @returns list of repositories
+   *
+   */
 const RepositoriesList = () => {
     const [query, setQuery] = useState("");
-  
     const { loading, data, fetchMore } = useQuery(SEARCH_REPOSITORIES, {
       variables: { query },
     });
 
-  
+  /**
+   * Returns a new list of repositories.
+   *
+   * @remarks
+   * This method is called when pagination is used.
+   *
+   * @returns a the data required for the table and it combines previous edges with new ones from the API call.
+   *
+   * @beta
+   */  
     const handleLoadMore = () => {
       fetchMore({
         variables: { query, after: data.search.pageInfo.endCursor },
@@ -62,7 +78,7 @@ const RepositoriesList = () => {
               hideOnSinglePage: true,
             }}
           >
-            <Column title="Name" dataIndex="name" key="name" />
+            <Column title="Name" dataIndex="name" key="name"  render={(name:string,row:any)=> <a href={row.url}>{name}</a>}/>
             <Column title="Owner" dataIndex={["owner", "login"]} key="owner" />
             <Column
               title="Stars"
